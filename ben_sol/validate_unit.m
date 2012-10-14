@@ -6,11 +6,12 @@ function [erreur_unit] = validate_unit(M,train,i)
 matching=zeros(26,1);
 max=0;
 temp=0;
+corrected_row = compensate(M(i,:))
 for l=1:26
     for j=2:129
-        matching(l) = matching(l) + (M(i,j)-0.2)*train(l,j);
+        matching(l) = matching(l) + corrected_row(j)*train(l,j);
     end
-    if matching(l) > max
+    if matching(l) >= max
         temp=l-1;
         max=matching(l);
     end

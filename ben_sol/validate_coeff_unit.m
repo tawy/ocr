@@ -7,9 +7,10 @@ function [erreur_unit, nb_comparison] = validate_coeff_unit(M,train,i,coeff)
 
 matching=zeros(26,2);
 matching(:,1) = 0:25;
+corrected_row = compensate(M(i,:));
 for l=1:26
     for j=2:129
-        matching(l,2) = matching(l,2) + M(i,j)*train(l,j);
+        matching(l,2) = matching(l,2) + corrected_row(j)*train(l,j);
     end
 end
 
